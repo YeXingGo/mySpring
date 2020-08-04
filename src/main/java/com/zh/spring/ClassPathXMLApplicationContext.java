@@ -84,6 +84,10 @@ public class ClassPathXMLApplicationContext extends AbstractApplicationContext {
         Attribute scopeAttr = bean.attribute("scope");
         // 对象别名
         String name = nameAttr.getValue();
+        FactoryBean factoryBean = super.cache3.get(name);
+        if (factoryBean != null) {
+            return factoryBean;
+        }
         // 对象作用域
         String scope = scopeAttr != null && scopeAttr.getValue() == null
                 ? scopeAttr.getValue() : Scope.SINGLE;
@@ -93,7 +97,7 @@ public class ClassPathXMLApplicationContext extends AbstractApplicationContext {
         // 获取对象
         Object o = clazz.newInstance();
         // 父类对象
-        FactoryBean factoryBean = new FactoryBean();
+         factoryBean = new FactoryBean();
         factoryBean.setClassName(className);
         factoryBean.setName(name);
         factoryBean.setScope(scope);
@@ -115,6 +119,7 @@ public class ClassPathXMLApplicationContext extends AbstractApplicationContext {
                     if (beanElemenet == null) {
                         throw new RuntimeException("找不对对应的类：" + refAttr.getValue());
                     }
+                    // 使用递归把对应的子元素加入
                     sonfactoryBean = addBean(beanElemenet);
 
                 }

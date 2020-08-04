@@ -3,6 +3,9 @@ package com.zh.spring.controller;
 import com.zh.spring.service.Service1;
 
 public class Controller1 {
+    public Controller1 () {
+        System.out.println("======创建的对象 "+Controller1.class.getSimpleName());
+    }
     private Service1 service1;
     private String name;
 
