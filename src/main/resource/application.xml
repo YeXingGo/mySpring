@@ -1,0 +1,10 @@
+<beans>
+
+    <!--controller 注入-->
+    <bean name="controller1" class="com.zh.spring.controller.Controller1">
+        <properties name="service1" ref="service1"></properties>
+        <properties name="name" value="张三"></properties>
+    </bean>
+    <!--service 注入-->
+    <bean name ="service1" class="com.zh.spring.service.impl.ServiceImpl1" scope="singlon"></bean>
+</beans>
